@@ -1,26 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% if title %}
-    <title>Flaskr - {{ title }}</title>
-    {% else %}
-    <title>Flaskr</title>
-    {% endif %}
+{% extends 'layout.html' %}
 
-</head>
-<body>
-    <h1>Home Page</h1>
-
+{% block content %}
     {% for post in posts %}
-
-    <h2> {{ post.title }} </h2>
-    <p>By: {{ post.author }}</p>
-    <p>{{ post.content }}</p>
-    <p>Date: {{ post.date_posted }}</p>
-
+        <h2> {{ post.title }} </h2>
+        <p>By: {{ post.author }}</p>
+        <p>{{ post.content }}</p>
+        <p>Date: {{ post.date_posted }}</p>
     {% endfor %}
+{% endblock content %}
     
-</body>
-</html>
+
