@@ -6,6 +6,8 @@ from datetime import datetime
 def load_user(user_id): 
     return User.query.get(int(user_id))
 
+# 30:22
+
 # USER MODEL 
 class User(db.Model, UserMixin): 
     id = db.Column(db.Integer, primary_key=True)
