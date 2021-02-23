@@ -9,28 +9,13 @@ from flaskr.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostFor
 from flask_login import login_user, current_user, logout_user, login_required
 
 
-posts = [
-    {
-        "author": "Derek Oshita", 
-        "title": "Freakin blog dude", 
-        "content": "First content", 
-        "date_posted": "April 14, 1992"
-
-    }, 
-        {
-        "author": "Mila Oshita", 
-        "title": "Best lady", 
-        "content": "Second content", 
-        "date_posted": "April 20, 1992"
-    }
-]
-
 # ROUTES ################################################################################################################################
 
 # HOME
 @app.route("/")
 @app.route("/home")
 def home(): 
+    posts = Post.query.all()
     return render_template("home.html", posts=posts)
 
 # ABOUT
@@ -119,6 +104,9 @@ def account():
 def new_post(): 
     form = PostForm()
     if form.validate_on_submit():
+        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
         flash(F"Post created!", 'success')
         return redirect(url_for('home'))
     return render_template('create_post.html', title='New Post', form=form)
