@@ -138,7 +138,7 @@ def update_post(post_id):
 
     return render_template('create_post.html', title='Update Post', form=form, legend='Update Post') 
 
-
+# DELETE POST
 @app.route('/post/<int:post_id>/delete', methods=['POST'])
 @login_required
 def delete_post(post_id):
@@ -149,3 +149,13 @@ def delete_post(post_id):
     db.session.commit()
     flash(f"Your post has been deleted!", 'success')
     return redirect(url_for('home'))
+
+# USER AND THEIR POSTS
+@app.route("/user/<string:username>")
+def user_posts(username): 
+    page = request.args.get('page', 1, type=int)
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = Post.query.filter_by(author=user)\
+        .order_by(Post.date_posted.desc())\
+        .paginate(page=page, per_page=5)
+    return render_template("user_post.html", posts=posts, user=user)
