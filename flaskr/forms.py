@@ -6,6 +6,7 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationE
 
 from flaskr.models import User
 
+
 # REGISTRATION FORM 
 class RegistrationForm(FlaskForm): 
     username = StringField('Username', validators=[
