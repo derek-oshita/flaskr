@@ -4,7 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 
-# flaskr1234
+# flaskrblog.reset.please@gmail.com
 
 # APP CONFIG
 app = Flask(__name__)
